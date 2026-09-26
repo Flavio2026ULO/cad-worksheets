@@ -1,0 +1,242 @@
+<!--
+  =====================================================================
+  DOCTYPE
+  Indica ao browser que este documento é HTML5.
+  Tem de ser sempre a primeira linha do ficheiro.
+  =====================================================================
+-->
+<!DOCTYPE html>
+
+<!--
+  Elemento raiz do documento: tudo o resto fica dentro de <html>.
+  lang="pt-PT" indica a língua da página (útil para motores de pesquisa,
+  leitores de ecrã e tradutores automáticos).
+-->
+<html lang="pt-PT">
+
+<!--
+  =====================================================================
+  HEAD
+  Contém informação SOBRE a página (metadados). Nada do que está aqui
+  aparece no conteúdo da página (slide 33 do PDF de HTML).
+  =====================================================================
+-->
+<head>
+  <!-- Codificação dos caracteres: UTF-8 permite acentos e símbolos especiais -->
+  <meta charset="UTF-8">
+
+  <!--
+    Viewport: faz a página adaptar-se à largura do ecrã do dispositivo.
+    Sem isto, o Bootstrap não consegue ser responsivo em telemóveis.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Título que aparece no separador (tab) do browser -->
+  <title>History</title>
+
+  <!--
+    Font Awesome: biblioteca de ícones. Nesta página não é usada,
+    mas mantém-se para ficar igual ao index.html e poder ser usada no futuro.
+  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <!--
+    CSS do Bootstrap 5: define as classes usadas na navbar
+    (navbar, bg-dark, nav-link, etc.).
+    - integrity: garante que o ficheiro descarregado não foi alterado.
+    - crossorigin="anonymous": pede o ficheiro sem enviar dados do
+      utilizador (necessário para o integrity funcionar).
+  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!--
+    =================================================================
+    CSS INTERNO (internal stylesheet - slide 42 do PDF de HTML)
+    Regras escritas dentro de <style>, no <head>, que se aplicam só
+    a esta página. Servem para dar aspeto à tabela.
+    =================================================================
+  -->
+  <style>
+    /*
+      Seletor por tipo de elemento (slide 43): aplica-se a todas as <table>.
+      - font-family: tipo de letra Arial; se não existir, usa outra
+        letra sem serifas (sans-serif).
+      - border-collapse: collapse: junta as bordas das células numa só,
+        em vez de cada célula ter a sua borda separada.
+      - width: 100%: a tabela ocupa a largura toda da página.
+    */
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    /*
+      Aplica-se a todas as células de dados (td) E de cabeçalho (th).
+      A vírgula serve para dar as mesmas regras a vários seletores.
+      - text-align: left: texto alinhado à esquerda (os <th> por defeito
+        vêm centrados, isto alinha-os com o resto).
+      - padding: 8px: espaço interior de 8px à volta do texto de cada célula.
+    */
+    td,
+    th {
+      text-align: left;
+      padding: 8px;
+    }
+
+    /*
+      Pseudo-classe :nth-child(odd): escolhe as linhas (tr) ímpares
+      (1.ª, 3.ª, 5.ª...) e pinta-as de cinzento claro.
+      Como a 1.ª linha é a do cabeçalho, fica: cabeçalho cinzento,
+      depois branco, cinzento, branco... (efeito "zebra").
+      Com "even" seriam as linhas pares.
+    */
+    tr:nth-child(odd) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+
+<!--
+  =====================================================================
+  BODY
+  Tudo o que o utilizador vê na página fica dentro do <body>.
+  =====================================================================
+-->
+<body>
+
+  <!--
+    =================================================================
+    BARRA DE NAVEGAÇÃO (baseada no slide 29 do PDF do Bootstrap)
+    Igual à do index.html, exceto qual dos links está "active".
+    =================================================================
+    <nav>: elemento semântico do HTML5 para navegação (slide 34 do PDF de HTML).
+    - navbar: transforma o <nav> numa barra de navegação do Bootstrap.
+    - navbar-expand-lg: em ecrãs grandes (≥ 992px) os links aparecem na
+      barra; em ecrãs mais pequenos ficam atrás do botão "hambúrguer".
+    - navbar-dark: texto dos links em cor clara (para fundo escuro).
+    - bg-dark: fundo escuro.
+  -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!--
+      container-fluid: contentor a 100% da largura (slide 6).
+      Alinha o título, o botão e os links dentro da navbar.
+    -->
+    <div class="container-fluid">
+
+      <!-- navbar-brand: nome do site; leva à página inicial ao clicar -->
+      <a class="navbar-brand" href="index.html">Home Sweet Home</a>
+
+      <!--
+        Botão "hambúrguer", só visível em ecrãs pequenos. Mostra/esconde os links.
+        - data-bs-toggle="collapse": o botão abre e fecha um bloco.
+        - data-bs-target="#navbarNavAltMarkup": qual é o bloco (pelo id).
+        - aria-*: informação para leitores de ecrã (acessibilidade).
+        NOTA: nos slides aparece "data-toggle"/"data-target" (Bootstrap 4).
+        No Bootstrap 5 é obrigatório o "bs".
+      -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Desenha as três riscas do ícone -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!--
+        Bloco com os links. Sempre visível em ecrãs grandes; em ecrãs
+        pequenos fica escondido até se clicar no botão.
+        O id tem de ser igual ao data-bs-target do botão.
+      -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        <!-- navbar-nav: organiza os links como menu -->
+        <div class="navbar-nav">
+
+          <!-- Link para o Dashboard (sem "active", porque não é esta a página atual) -->
+          <a class="nav-link" href="index.html">Dashboard</a>
+
+          <!--
+            active: destaca o History, porque é a página onde estamos.
+            aria-current="page": indica aos leitores de ecrã que é a página atual
+            (substitui o <span class="sr-only">(current)</span> do Bootstrap 4).
+          -->
+          <a class="nav-link active" aria-current="page" href="history.html">History</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!--
+    <main>: elemento semântico do HTML5 para o conteúdo principal da
+    página (slide 34 do PDF de HTML).
+  -->
+  <main>
+
+    <!--
+      Parágrafo vazio: cria espaço entre a navbar e a tabela, graças à
+      margem que os <p> têm por defeito. Tem de ficar FORA da <table>:
+      uma tabela só pode conter linhas e células.
+    -->
+    <p></p>
+
+    <!-- <table>: início da tabela -->
+    <table>
+
+      <!--
+        <tr> (table row): uma linha da tabela.
+        Esta primeira linha é o cabeçalho.
+        <th> (table header): célula de cabeçalho, com texto em negrito por defeito.
+      -->
+      <tr>
+        <th>Category</th>
+        <th>State</th>
+        <th>Last Changed</th>
+      </tr>
+
+      <!--
+        Linhas de dados. Cada <td> (table data) é uma célula normal.
+        Cada linha tem 3 células, uma por coluna do cabeçalho.
+      -->
+      <tr>
+        <td>Kitchen lights</td>
+        <td>Off</td>
+        <td>23:40 2018-09-16</td>
+      </tr>
+
+      <tr>
+        <td>Kitchen lights</td>
+        <td>On</td>
+        <td>20:30 2018-09-16</td>
+      </tr>
+
+      <tr>
+        <td>Weather</td>
+        <td>Sunset</td>
+        <td>20:35 2018-09-16</td>
+      </tr>
+
+      <tr>
+        <td>Bell</td>
+        <td>Ring</td>
+        <td>19:30 2018-09-16</td>
+      </tr>
+
+    </table>
+    <!-- Fim da tabela -->
+  </main>
+
+  <!--
+    =================================================================
+    JAVASCRIPT DO BOOTSTRAP
+    Necessário para o botão "hambúrguer" abrir e fechar o menu em
+    ecrãs pequenos. O "bundle" já inclui o Popper, que o Bootstrap usa
+    internamente. Fica no fim do <body> para a página carregar primeiro.
+    =================================================================
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

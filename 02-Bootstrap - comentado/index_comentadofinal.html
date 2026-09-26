@@ -1,0 +1,351 @@
+<!--
+  =====================================================================
+  DOCTYPE
+  Indica ao browser que este documento é HTML5.
+  Tem de ser sempre a primeira linha do ficheiro.
+  =====================================================================
+-->
+<!DOCTYPE html>
+
+<!--
+  Elemento raiz do documento: tudo o resto fica dentro de <html>.
+  O atributo lang="pt-PT" indica a língua da página (útil para
+  motores de pesquisa, leitores de ecrã e tradutores automáticos).
+-->
+<html lang="pt-PT">
+
+<!--
+  =====================================================================
+  HEAD
+  Contém informação SOBRE a página (metadados). Nada do que está aqui
+  aparece no conteúdo da página (slide 33 do PDF de HTML).
+  =====================================================================
+-->
+<head>
+  <!-- Codificação dos caracteres: UTF-8 permite acentos (ã, é, ç...) e símbolos como °C -->
+  <meta charset="UTF-8">
+
+  <!--
+    Viewport: faz com que a página se adapte à largura do ecrã do dispositivo
+    (telemóvel, tablet, computador). Sem isto, o Bootstrap não consegue ser
+    responsivo e os breakpoints (sm, md, lg...) não funcionam bem em telemóveis.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Título que aparece no separador (tab) do browser -->
+  <title>Home Sweet Home</title>
+
+  <!--
+    Font Awesome: biblioteca de ícones.
+    É daqui que vêm os ícones usados com <i class="fa-...">
+    (termómetro, lâmpada, olho, música, relógio, calendário, sol).
+  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <!--
+    CSS do Bootstrap 5: é o ficheiro que define todas as classes usadas
+    na página (navbar, card, row, col-sm-4, text-center, float-end, etc.).
+    - integrity: código de verificação que garante que o ficheiro
+      descarregado não foi alterado por terceiros.
+    - crossorigin="anonymous": pede o ficheiro ao outro servidor sem
+      enviar dados do utilizador (necessário para o integrity funcionar).
+  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<!--
+  =====================================================================
+  BODY
+  Tudo o que o utilizador vê na página fica dentro do <body>.
+  =====================================================================
+-->
+<body>
+
+  <!--
+    =================================================================
+    BARRA DE NAVEGAÇÃO (baseada no slide 29 do PDF do Bootstrap)
+    =================================================================
+    <nav>: elemento semântico do HTML5 para zonas de navegação
+    (slide 34 do PDF de HTML).
+    - navbar: transforma o <nav> numa barra de navegação do Bootstrap.
+    - navbar-expand-lg: em ecrãs grandes (≥ 992px) os links aparecem
+      todos na barra; em ecrãs mais pequenos ficam escondidos atrás
+      do botão "hambúrguer".
+    - navbar-dark: põe o texto dos links em cor clara (para fundo escuro).
+    - bg-dark: fundo escuro (quase preto).
+  -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!--
+      container-fluid: contentor que ocupa 100% da largura em todos os
+      tamanhos de ecrã (slide 6 do PDF do Bootstrap). Dentro da navbar,
+      serve para alinhar corretamente o título, o botão e os links.
+    -->
+    <div class="container-fluid">
+
+      <!--
+        navbar-brand: o "nome/marca" do site, com letra um pouco maior.
+        Aponta para index.html para que clicar no título leve à página inicial.
+      -->
+      <a class="navbar-brand" href="index.html">Home Sweet Home</a>
+
+      <!--
+        Botão "hambúrguer" (três riscas), só visível em ecrãs pequenos.
+        Quando é clicado, mostra/esconde os links da navbar.
+        - navbar-toggler: estilo do botão.
+        - data-bs-toggle="collapse": diz ao JavaScript do Bootstrap que
+          este botão abre e fecha um bloco.
+        - data-bs-target="#navbarNavAltMarkup": qual é o bloco a abrir/fechar
+          (o que tem esse id). O "#" indica que é um id.
+        - aria-controls / aria-expanded / aria-label: informação para
+          leitores de ecrã (acessibilidade).
+        NOTA: nos slides aparece "data-toggle" e "data-target", que é a
+        sintaxe do Bootstrap 4. No Bootstrap 5 é obrigatório o "bs".
+      -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- navbar-toggler-icon: desenha as três riscas do ícone -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!--
+        Bloco que contém os links.
+        - collapse navbar-collapse: em ecrãs grandes está sempre visível;
+          em ecrãs pequenos fica escondido até se clicar no botão acima.
+        - id: tem de ser igual ao data-bs-target do botão.
+      -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        <!-- navbar-nav: organiza os links como menu da navbar -->
+        <div class="navbar-nav">
+
+          <!--
+            nav-link: estilo de link da navbar.
+            active: destaca o link da página onde estamos (fica mais claro).
+            aria-current="page": diz aos leitores de ecrã que esta é a
+            página atual (substitui o <span class="sr-only">(current)</span>
+            dos slides, que é do Bootstrap 4 e no 5 aparecia como texto visível).
+          -->
+          <a class="nav-link active" aria-current="page" href="index.html">Dashboard</a>
+
+          <!-- Link para a página de histórico (sem "active", porque não é a página atual) -->
+          <a class="nav-link" href="history.html">History</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!--
+    Parágrafo vazio: não tem texto, mas como todos os <p> têm uma margem
+    em baixo por defeito, cria um espaço entre a navbar e os cards.
+  -->
+  <p></p>
+
+  <!--
+    =================================================================
+    ZONA DOS CARDS (sistema de grelha - slides 6 a 9 do PDF do Bootstrap)
+    =================================================================
+    container-fluid: contentor a 100% da largura. É obrigatório à volta
+    de uma "row" (slide 6: "Required when using our default grid system"),
+    senão a página fica com uma barra de scroll horizontal.
+  -->
+  <div class="container-fluid">
+
+    <!--
+      row: linha da grelha. Serve de "embrulho" às colunas (slide 8).
+      Cada linha está dividida em 12 partes.
+    -->
+    <div class="row">
+
+      <!--
+        =============================================================
+        CARD 1: KITCHEN
+        =============================================================
+        col-sm-4: a coluna ocupa 4 das 12 partes (1/3 da largura) em
+        ecrãs a partir de 576px (sm). Em ecrãs mais pequenos ocupa a
+        largura toda e os cards ficam uns por baixo dos outros.
+        Três colunas de 4 = 12, por isso os três cards ficam lado a lado.
+      -->
+      <div class="col-sm-4">
+
+        <!-- card: caixa com borda e cantos arredondados (slide 19) -->
+        <div class="card">
+
+          <!--
+            card-header: zona de cabeçalho do card, com fundo cinzento claro.
+            text-center: centra o texto (slide 20).
+          -->
+          <div class="card-header text-center">
+            <!-- <h5>: título de nível 5 (slide 36 do PDF de HTML) -->
+            <h5>Kitchen</h5>
+          </div>
+
+          <!-- card-body: zona principal do conteúdo do card, com espaço interior -->
+          <div class="card-body">
+
+            <!--
+              Cada item é um parágrafo <p> com a classe card-text.
+              O <p> tem margem em baixo por defeito, o que separa os itens.
+            -->
+            <p class="card-text">
+              <!--
+                Ícone do termómetro (Font Awesome).
+                - fa-solid: ícone preenchido.
+                - fa-temperature-quarter: desenho do termómetro.
+                - text-success: cor verde do Bootstrap.
+              -->
+              <i class="fa-solid fa-temperature-quarter text-success"></i>
+
+              <!-- <strong>: texto em negrito, "strong importance" (slide 36 do PDF de HTML) -->
+              <strong>Temperature</strong>
+
+              <!--
+                <span>: elemento inline sem significado próprio (slides 29 e 36),
+                usado só para isolar o valor e aplicar-lhe classes.
+                float-end: empurra o valor para o lado direito do card
+                (é a "irmã" de float-start, que aparece no slide 12).
+              -->
+              <span class="float-end">21.6 °C</span>
+
+              <!-- <br>: quebra de linha, para o tempo ficar na linha de baixo -->
+              <br>
+              5 minutes ago
+            </p>
+
+            <p class="card-text">
+              <!-- fa-regular: ícone só com contorno (lâmpada apagada) -->
+              <i class="fa-regular fa-lightbulb"></i>
+              <strong>Lights</strong>
+              <!-- text-danger: cor vermelha do Bootstrap (desligado) -->
+              <span class="float-end text-danger">Off</span><br>
+              10 minutes ago
+            </p>
+
+            <p class="card-text">
+              <!-- fa-eye: ícone de olho; text-muted: cor cinzenta (slide 20) -->
+              <i class="fa-solid fa-eye text-muted"></i>
+              <strong>West Window</strong>
+              <!-- text-success: cor verde (aberta) -->
+              <span class="float-end text-success">Open</span><br>
+              15 minutes ago
+            </p>
+
+            <p class="card-text">
+              <i class="fa-solid fa-eye text-muted"></i>
+              <strong>North Window</strong>
+              <span class="float-end text-success">Open</span><br>
+              15 minutes ago
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Fim do card Kitchen -->
+
+      <!--
+        =============================================================
+        CARD 2: LIVING ROOM
+        Mesma estrutura do card Kitchen, só mudam os textos, ícones e cores.
+        =============================================================
+      -->
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Living Room</h5>
+          </div>
+          <div class="card-body">
+
+            <p class="card-text">
+              <!-- text-danger: termómetro vermelho -->
+              <i class="fa-solid fa-temperature-quarter text-danger"></i>
+              <strong>Temperature</strong>
+              <span class="float-end">22.6 °C</span><br>
+              5 minutes ago
+            </p>
+
+            <p class="card-text">
+              <!-- Lâmpada com contorno (fa-regular) porque está desligada -->
+              <i class="fa-regular fa-lightbulb"></i>
+              <strong>Ceiling Lights</strong>
+              <span class="float-end text-danger">Off</span><br>
+              5 minutes ago
+            </p>
+
+            <p class="card-text">
+              <!-- Lâmpada preenchida (fa-solid) e amarela (text-warning) porque está ligada -->
+              <i class="fa-solid fa-lightbulb text-warning"></i>
+              <strong>Ambient Lights</strong>
+              <span class="float-end text-success">On</span><br>
+              7 minutes ago
+            </p>
+
+            <p class="card-text">
+              <!-- fa-music: nota musical; text-primary: cor azul do Bootstrap -->
+              <i class="fa-solid fa-music text-primary"></i>
+              <strong>Ambient Music</strong>
+              <span class="float-end text-success">On</span><br>
+              17 minutes ago
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Fim do card Living Room -->
+
+      <!--
+        =============================================================
+        CARD 3: CLOCK
+        =============================================================
+      -->
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Clock</h5>
+          </div>
+          <div class="card-body">
+
+            <!--
+              Aqui as três linhas estão dentro do MESMO <p>, separadas por <br>,
+              para ficarem juntas sem espaço entre elas (como na imagem).
+            -->
+            <p class="card-text">
+              <!-- Ícone de relógio, azul -->
+              <i class="fa-regular fa-clock text-primary"></i>
+              <strong>Time</strong>
+              <span class="float-end">22:30</span><br>
+
+              <!-- Ícone de calendário, na cor normal do texto -->
+              <i class="fa-regular fa-calendar"></i>
+              <strong>Date</strong>
+              <span class="float-end">2018-09-18</span><br>
+
+              <!-- Ícone de sol, amarelo; esta linha não tem valor à direita -->
+              <i class="fa-solid fa-sun text-warning"></i>
+              <strong>Sunrise / Sunset above horizon</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Fim do card Clock -->
+
+    </div>
+    <!-- Fim da row -->
+  </div>
+  <!-- Fim do container-fluid dos cards -->
+
+  <!--
+    =================================================================
+    JAVASCRIPT DO BOOTSTRAP
+    =================================================================
+    Necessário para as partes interativas do Bootstrap, neste caso o
+    botão "hambúrguer" que abre e fecha o menu em ecrãs pequenos.
+    O "bundle" já inclui o Popper (biblioteca que o Bootstrap usa
+    internamente para menus e tooltips).
+    Fica no fim do <body> para a página carregar primeiro o conteúdo
+    e só depois o script.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
