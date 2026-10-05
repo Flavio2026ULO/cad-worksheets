@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="Flávio Duarte" content="02-Bootstrap">
+  <meta name="author" content="Flávio Duarte">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home Sweet Home</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -41,13 +41,17 @@
           <div class="card-body">
             <p class="card-text">
               <i class="fa-solid fa-temperature-quarter text-success"></i> <strong>Temperature</strong>
-              <span class="float-end">21.6 °C</span><br>
+              <span id="kitchen-temperature" class="float-end">21.6 °C</span><br>
               5 minutes ago
             </p>
             <p class="card-text">
-              <i class="fa-regular fa-lightbulb"></i> <strong>Lights</strong>
-              <span class="float-end text-danger">Off</span><br>
+              <i id="kitchen-lights-icon" class="fa-regular fa-lightbulb text-secondary"></i> <strong>Lights</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="kitchen-lights-toggle"
+                  aria-label="Kitchen lights">
+              </span><br>
               10 minutes ago
+            </p>
             </p>
             <p class="card-text">
               <i class="fa-solid fa-eye text-muted"></i> <strong>West Window</strong>
@@ -71,22 +75,33 @@
           <div class="card-body">
             <p class="card-text">
               <i class="fa-solid fa-temperature-quarter text-danger"></i> <strong>Temperature</strong>
-              <span class="float-end">22.6 °C</span><br>
+              <span id="living-temperature" class="float-end">22.6 °C</span><br>
               5 minutes ago
             </p>
             <p class="card-text">
-              <i class="fa-regular fa-lightbulb"></i> <strong>Ceiling Lights</strong>
-              <span class="float-end text-danger">Off</span><br>
+              <i id="living-ceiling-lights-icon" class="fa-regular fa-lightbulb text-secondary"></i> <strong>Ceiling
+                Lights</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="living-ceiling-lights-toggle"
+                  aria-label="Ceiling lights">
+              </span><br>
               5 minutes ago
             </p>
             <p class="card-text">
-              <i class="fa-solid fa-lightbulb text-warning"></i> <strong>Ambient Lights</strong>
-              <span class="float-end text-success">On</span><br>
+              <i id="living-ambient-lights-icon" class="fa-solid fa-lightbulb text-warning"></i> <strong>Ambient
+                Lights</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="living-ambient-lights-toggle"
+                  aria-label="Ambient lights" checked>
+              </span><br>
               7 minutes ago
             </p>
             <p class="card-text">
-              <i class="fa-solid fa-music text-primary"></i> <strong>Ambient Music</strong>
-              <span class="float-end text-success">On</span><br>
+              <i id="living-music-icon" class="fa-solid fa-volume-high text-primary"></i> <strong>Ambient Music</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="living-music-toggle"
+                  aria-label="Ambient music" checked>
+              </span><br>
               17 minutes ago
             </p>
           </div>
@@ -101,9 +116,9 @@
           <div class="card-body">
             <p class="card-text">
               <i class="fa-regular fa-clock text-primary"></i> <strong>Time</strong>
-              <span class="float-end">22:30</span><br>
+              <span id="clock-time" class="float-end">22:30</span><br>
               <i class="fa-regular fa-calendar"></i> <strong>Date</strong>
-              <span class="float-end">2018-09-18</span><br>
+              <span id="clock-date" class="float-end">2018-09-18</span><br>
               <i class="fa-solid fa-sun text-warning"></i> <strong>Sunrise / Sunset above horizon</strong>
             </p>
           </div>
@@ -114,6 +129,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+
+  <script src="js/index.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--
+  ====================================================================
+   HOME SWEET HOME - DASHBOARD (página principal)
+  ====================================================================
+   Esta página mostra 4 painéis (cards): Kitchen, Living Room, Clock
+   e Weather. O aspeto vem do Bootstrap (CSS), os ícones do Font
+   Awesome e o comportamento (o que muda sozinho) do ficheiro
+   js/index.js, que usa jQuery.
+
+   <!DOCTYPE html> (a primeira linha) diz ao browser que esta página
+   é HTML5. Tem de ser sempre a primeira coisa do ficheiro.
+  ====================================================================
+-->
+
+<!--
+  <html> é o elemento raiz: tudo o resto fica dentro dele.
+  lang="pt-PT" indica a língua da página (português de Portugal).
+  Ajuda os leitores de ecrã e os motores de busca.
+-->
+<html lang="pt-PT">
+
+<!--
+  ====================================================================
+   <head>: informação SOBRE a página. Nada daqui aparece no corpo
+   da página, exceto o <title>, que aparece no separador do browser.
+  ====================================================================
+-->
+<head>
+  <!-- Codificação dos caracteres. UTF-8 permite acentos (á, ç, ã) e
+       símbolos como o °. Sem isto, "°C" podia aparecer como "Â°C". -->
+  <meta charset="UTF-8">
+
+  <!-- Autor da página. Não aparece no ecrã. -->
+  <meta name="author" content="Flávio Duarte">
+
+  <!-- Faz a página ajustar-se à largura do ecrã em telemóveis.
+       Sem isto, o telemóvel mostrava a página "encolhida" como num
+       computador. É obrigatório para o Bootstrap ser responsivo. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Texto que aparece no separador (tab) do browser. -->
+  <title>Home Sweet Home</title>
+
+  <!-- Font Awesome: biblioteca de ÍCONES (lâmpadas, termómetros, relógio...).
+       É carregada de um CDN (um servidor externo), por isso não precisa de
+       estar no nosso projeto. Os ícones usam-se com <i class="fa-...">. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <!-- Bootstrap 5.3.3 (parte CSS): dá o aspeto à página (grelha, cards,
+       cores, botões...).
+       integrity="sha384-..." é uma "impressão digital" do ficheiro: o
+       browser confirma que o ficheiro recebido não foi alterado.
+       crossorigin="anonymous" é necessário para essa verificação funcionar
+       com ficheiros de outro servidor. -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<!--
+  ====================================================================
+   <body>: tudo o que aparece no ecrã.
+  ====================================================================
+-->
+<body>
+
+  <!--
+    ==================================================================
+     BARRA DE NAVEGAÇÃO (navbar) - a faixa preta no topo
+    ==================================================================
+     Classes do Bootstrap (Cap 2 slide 29):
+       navbar            -> componente "barra de navegação"
+       navbar-expand-lg  -> em ecrãs grandes (992 px ou mais) mostra os
+                            links na horizontal; em ecrãs mais pequenos
+                            esconde-os (ficam "colapsados")
+       navbar-dark       -> texto claro (para fundo escuro)
+       bg-dark           -> fundo escuro (preto/cinzento)
+
+     Nota: no exemplo dos slides existe também um botão "navbar-toggler"
+     (o ícone de 3 riscas) para abrir o menu em ecrãs pequenos. Aqui não
+     existe, por isso em ecrãs pequenos os links Dashboard/History ficam
+     escondidos sem forma de os abrir.
+  -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!-- container-fluid: caixa que ocupa toda a largura disponível. -->
+    <div class="container-fluid">
+      <!-- row / col-sm: classes da grelha do Bootstrap (Cap 2 slide 8).
+           Aqui servem só de espaçadores: as colunas col-sm estão vazias. -->
+      <!-- navbar-brand: o "nome/marca" do site, com letra maior. -->
+      <div class="row">
+        <div class="col-sm"></div><a class="navbar-brand">Home Sweet Home</a>
+      </div>
+      <div class="col-sm"></div>
+    </div>
+
+    <!-- collapse navbar-collapse: zona que o Bootstrap esconde em ecrãs
+         pequenos. O id é o que o botão "toggler" usaria para a abrir. -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- navbar-nav: lista de links da barra. -->
+      <div class="navbar-nav">
+        <!-- nav-link: estilo de link da navbar.
+             active: marca a página onde estamos (aparece mais claro).
+             href="index.html": ao clicar abre esta mesma página.
+             visually-hidden: classe do Bootstrap 5 que esconde o texto
+             "(current)" no ecrã, mas os leitores de ecrã continuam a lê-lo
+             (para pessoas cegas saberem qual é a página atual). -->
+        <a class=" nav-link active" href="index.html">Dashboard</a><span class="visually-hidden">(current)</span>
+        <!-- Link para a página do histórico. -->
+        <a class="nav-link" href="history.html">History</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Parágrafo vazio usado só para dar um pequeno espaço entre a navbar
+       e os painéis (os <p> têm margem por defeito). -->
+  <p></p>
+
+  <!--
+    ==================================================================
+     ÁREA DOS PAINÉIS
+    ==================================================================
+     Grelha do Bootstrap (Cap 2 slides 8 e 9):
+       container-fluid -> caixa com toda a largura do ecrã
+       row             -> uma linha da grelha
+       col-sm-4        -> coluna com 4 de 12 partes = 1/3 da largura,
+                          a partir de ecrãs "sm" (576 px ou mais).
+                          Em ecrãs mais pequenos (telemóvel) cada coluna
+                          ocupa a largura toda e os painéis ficam uns
+                          por baixo dos outros.
+     3 colunas x 4 = 12 -> os 3 painéis preenchem uma linha.
+  -->
+  <div class="container-fluid">
+
+    <!-- ===================== 1ª LINHA ===================== -->
+    <div class="row">
+
+      <!--
+        ============================================================
+         PAINEL "KITCHEN" (cozinha)
+        ============================================================
+         Estrutura de card do Bootstrap (Cap 2 slides 19 a 23):
+           card         -> caixa com borda e cantos arredondados
+           card-header  -> cabeçalho cinzento da caixa
+           card-body    -> conteúdo da caixa
+           card-text    -> parágrafo com o espaçamento certo dentro da card
+           text-center  -> centra o texto
+      -->
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Kitchen</h5>
+          </div>
+          <div class="card-body">
+
+            <!-- TEMPERATURA DA COZINHA
+                 <i class="fa-solid fa-temperature-quarter"> -> ícone de termómetro
+                 text-success -> cor verde do Bootstrap
+                 <strong> -> texto a negrito
+                 <span id="kitchen-temperature"> -> o id permite ao JavaScript
+                   encontrar este elemento e trocar o valor a cada 5 segundos:
+                   $('#kitchen-temperature').text(...)
+                 float-end -> empurra o elemento para o lado direito
+                 <br> -> quebra de linha -->
+            <p class="card-text">
+              <i class="fa-solid fa-temperature-quarter text-success"></i> <strong>Temperature</strong>
+              <span id="kitchen-temperature" class="float-end">21.6 °C</span><br>
+              5 minutes ago
+            </p>
+
+            <!-- LUZ DA COZINHA
+                 <i id="kitchen-lights-icon"> -> ícone da lâmpada. O id é usado
+                   pelo JavaScript para trocar o ícone e a cor ao clicar.
+                   fa-regular = lâmpada só com contorno (apagada)
+                   text-secondary = cinzento
+                 form-check form-switch -> transformam a checkbox num
+                   interruptor (switch) do Bootstrap.
+                 <input type="checkbox"> -> a caixa de seleção (ligado/desligado).
+                   form-check-input -> estilo Bootstrap do input
+                   role="switch" -> diz aos leitores de ecrã que é um interruptor
+                   id="kitchen-lights-toggle" -> o JavaScript regista aqui o clique:
+                     $('#kitchen-lights-toggle').on('click', ...)
+                   aria-label -> nome do interruptor para os leitores de ecrã,
+                     já que não há um <label> visível.
+                   Sem o atributo "checked" começa DESLIGADO. -->
+            <p class="card-text">
+              <i id="kitchen-lights-icon" class="fa-regular fa-lightbulb text-secondary"></i> <strong>Lights</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="kitchen-lights-toggle"
+                  aria-label="Kitchen lights">
+              </span><br>
+              10 minutes ago
+            </p>
+
+            <!-- JANELA OESTE (só texto fixo, não muda)
+                 fa-eye -> ícone de olho; text-muted -> cinzento claro
+                 text-success -> "Open" a verde -->
+            <p class="card-text">
+              <i class="fa-solid fa-eye text-muted"></i> <strong>West Window</strong>
+              <span class="float-end text-success">Open</span><br>
+              15 minutes ago
+            </p>
+
+            <!-- JANELA NORTE (só texto fixo, igual à de cima) -->
+            <p class="card-text">
+              <i class="fa-solid fa-eye text-muted"></i> <strong>North Window</strong>
+              <span class="float-end text-success">Open</span><br>
+              15 minutes ago
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        ============================================================
+         PAINEL "LIVING ROOM" (sala)
+        ============================================================
+         Mesma estrutura do painel da cozinha.
+      -->
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Living Room</h5>
+          </div>
+          <div class="card-body">
+
+            <!-- TEMPERATURA DA SALA
+                 text-danger -> termómetro a vermelho
+                 id="living-temperature" -> atualizado pelo JavaScript a cada 5 s -->
+            <p class="card-text">
+              <i class="fa-solid fa-temperature-quarter text-danger"></i> <strong>Temperature</strong>
+              <span id="living-temperature" class="float-end">22.6 °C</span><br>
+              5 minutes ago
+            </p>
+
+            <!-- LUZ DO TETO
+                 Começa DESLIGADA: lâmpada fa-regular (contorno), cinzenta,
+                 e o switch sem "checked". -->
+            <p class="card-text">
+              <i id="living-ceiling-lights-icon" class="fa-regular fa-lightbulb text-secondary"></i> <strong>Ceiling
+                Lights</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="living-ceiling-lights-toggle"
+                  aria-label="Ceiling lights">
+              </span><br>
+              5 minutes ago
+            </p>
+
+            <!-- LUZ AMBIENTE
+                 Começa LIGADA: lâmpada fa-solid (cheia), text-warning (amarela),
+                 e o switch tem o atributo "checked" (aparece ligado). -->
+            <p class="card-text">
+              <i id="living-ambient-lights-icon" class="fa-solid fa-lightbulb text-warning"></i> <strong>Ambient
+                Lights</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="living-ambient-lights-toggle"
+                  aria-label="Ambient lights" checked>
+              </span><br>
+              7 minutes ago
+            </p>
+
+            <!-- MÚSICA AMBIENTE
+                 Começa LIGADA: ícone fa-volume-high (coluna com som),
+                 text-primary (azul), switch com "checked".
+                 Ao desligar, o JavaScript troca para fa-volume-xmark (vermelho). -->
+            <p class="card-text">
+              <i id="living-music-icon" class="fa-solid fa-volume-high text-primary"></i> <strong>Ambient Music</strong>
+              <span class="float-end form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="living-music-toggle"
+                  aria-label="Ambient music" checked>
+              </span><br>
+              17 minutes ago
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        ============================================================
+         PAINEL "CLOCK" (relógio)
+        ============================================================
+         Os valores 22:30 e 2018-09-18 são só iniciais: o JavaScript
+         substitui-os logo pela hora e data atuais.
+      -->
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Clock</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <!-- HORA: atualizada a cada segundo por updateTime() -->
+              <i class="fa-regular fa-clock text-primary"></i> <strong>Time</strong>
+              <span id="clock-time" class="float-end">22:30</span><br>
+              <!-- DATA: escrita uma vez ao abrir a página por updateDate() -->
+              <i class="fa-regular fa-calendar"></i> <strong>Date</strong>
+              <span id="clock-date" class="float-end">2018-09-18</span><br>
+              <!-- Texto fixo -->
+              <i class="fa-solid fa-sun text-warning"></i> <strong>Sunrise / Sunset above horizon</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===================== FIM DA 1ª LINHA ===================== -->
+
+
+    <!--
+      ==================================================================
+       2ª LINHA: PAINEL "WEATHER" (Ficha 4, exercício 2)
+      ==================================================================
+       row mt-3 -> nova linha da grelha. "mt-3" é uma classe utilitária
+                   do Bootstrap: margin-top (margem em cima) de tamanho 3,
+                   para separar este painel dos de cima.
+       col-sm-4 -> ocupa 1/3 da largura, como os outros painéis.
+
+       Todos os valores começam com traços e são substituídos pelo
+       JavaScript quando a API do OpenWeatherMap responde.
+       Cada <span> tem um id para o jQuery o encontrar, ex.:
+         $('#weather-temp').text(response.main.temp + ' °C');
+    -->
+    <div class="row mt-3">
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Weather</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+
+              <!-- TEMPERATURA ATUAL (response.main.temp)
+                   fa-temperature-half -> termómetro a meio; text-primary -> azul -->
+              <i class="fa-solid fa-temperature-half text-primary"></i> <strong>Current Temperature</strong>
+              <span id="weather-temp" class="float-end">-- °C</span><br>
+
+              <!-- TEMPERATURA MÁXIMA (response.main.temp_max)
+                   fa-temperature-full -> termómetro cheio; text-danger -> vermelho -->
+              <i class="fa-solid fa-temperature-full text-danger"></i> <strong>Max. Temperature</strong>
+              <span id="weather-temp-max" class="float-end">-- °C</span><br>
+
+              <!-- TEMPERATURA MÍNIMA (response.main.temp_min)
+                   fa-temperature-empty -> termómetro vazio; text-info -> azul claro -->
+              <i class="fa-solid fa-temperature-empty text-info"></i> <strong>Min. Temperature</strong>
+              <span id="weather-temp-min" class="float-end">-- °C</span><br>
+
+              <!-- HUMIDADE (response.main.humidity)
+                   fa-droplet -> gota de água -->
+              <i class="fa-solid fa-droplet text-primary"></i> <strong>Humidity</strong>
+              <span id="weather-humidity" class="float-end">-- %</span><br>
+
+              <!-- NASCER DO SOL (response.sys.sunrise, convertido para "7h46")
+                   fa-sun -> sol; text-warning -> amarelo -->
+              <i class="fa-solid fa-sun text-warning"></i> <strong>Sunrise Time</strong>
+              <span id="weather-sunrise" class="float-end">--</span><br>
+
+              <!-- PÔR DO SOL (response.sys.sunset, convertido para "18h54")
+                   fa-moon -> lua; text-secondary -> cinzento -->
+              <i class="fa-solid fa-moon text-secondary"></i> <strong>Sunset Time</strong>
+              <span id="weather-sunset" class="float-end">--</span><br>
+
+              <!-- ÚLTIMA ATUALIZAÇÃO: há quanto tempo os dados foram obtidos.
+                   O JavaScript reescreve este texto a cada segundo
+                   ("5 seconds ago", "2 minutes ago", "1 hour ago").
+                   Se o pedido falhar mostra o erro, ex.: "Error 404".
+                   text-muted -> texto cinzento claro -->
+              <span class="text-muted">Last Update</span>
+              <span id="weather-last-update" class="float-end text-muted">--</span>
+            </p>
+
+            <!-- CAIXA DE TEXTO + BOTÃO para escolher a cidade
+                 input-group -> classe do Bootstrap que cola o input e o
+                   botão lado a lado, na mesma linha.
+                 <input type="text"> -> caixa de texto (Cap 1 slide 37)
+                   id="weather-city" -> o JavaScript lê o valor com
+                     $('#weather-city').val()
+                   form-control -> estilo Bootstrap para inputs (largura
+                     total, borda, cantos arredondados)
+                   value="Leiria" -> texto que já aparece escrito ao abrir;
+                     é a cidade usada no primeiro pedido.
+                   aria-label="City" -> nome do campo para leitores de ecrã
+                 <button> -> botão (Cap 2 slide 18)
+                   type="button" -> botão "normal", não envia formulários
+                   btn btn-success -> estilo de botão do Bootstrap, verde
+                   id="weather-get" -> o JavaScript regista o clique:
+                     $('#weather-get').on('click', ...) -->
+            <div class="input-group">
+              <input id="weather-city" type="text" class="form-control" value="Leiria" aria-label="City">
+              <button id="weather-get" type="button" class="btn btn-success">Get</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===================== FIM DA 2ª LINHA ===================== -->
+
+  </div>
+  <!-- FIM DO container-fluid DOS PAINÉIS -->
+
+  <!--
+    ==================================================================
+     SCRIPTS
+    ==================================================================
+     Ficam no fim do <body> (Cap 3 slide 6): assim, quando correm, todos
+     os elementos HTML de cima já existem, e a página aparece mais
+     depressa porque o browser desenha o conteúdo primeiro.
+
+     A ORDEM IMPORTA: cada script só pode usar o que foi carregado antes.
+  -->
+
+  <!-- 1) Bootstrap (parte JavaScript). Faz funcionar os componentes que
+          têm comportamento (menus que abrem, colapsar a navbar, ...).
+          "bundle" quer dizer que já inclui o Popper, de que o Bootstrap
+          precisa para posicionar menus. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!-- 2) jQuery 3.7.1 (Ficha 4, alínea 1b; Cap 4 slide 3). Cria o "$".
+          TEM de vir antes do index.js, porque o index.js usa o "$". -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- 3) O nosso código (pasta js, ficheiro index.js). -->
+  <script src="js/index.js"></script>
+
+</body>
+
+</html>

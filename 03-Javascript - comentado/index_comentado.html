@@ -1,0 +1,477 @@
+<!--
+  ============================================================================
+  FICHEIRO: index.html  (versão comentada)
+  PROJETO : Home Sweet Home – Dashboard de casa inteligente
+  NOTA    : Os comentários em HTML escrevem-se entre "<!--" e "-->".
+            O browser ignora tudo o que estiver lá dentro.
+  ============================================================================
+-->
+
+<!--
+  <!DOCTYPE html>
+  - "<!DOCTYPE"  -> declaração (não é uma tag) que diz ao browser que tipo de documento é.
+  - "html"       -> indica que é HTML5 (a versão atual). Sem isto, o browser entra em
+                    "quirks mode" (modo de compatibilidade antigo) e pode desenhar mal a página.
+-->
+<!DOCTYPE html>
+
+<!--
+  <html lang="pt-PT">
+  - "<html>"       -> elemento raiz; todo o documento fica dentro dele.
+  - "lang"         -> atributo que indica a língua do conteúdo.
+  - "pt-PT"        -> português de Portugal ("pt" = língua, "PT" = região).
+                      Ajuda leitores de ecrã, tradutores automáticos e motores de pesquisa.
+-->
+<html lang="pt-PT">
+
+<!--
+  <head>
+  - Cabeçalho do documento: contém informação SOBRE a página (metadados, título,
+    folhas de estilo). Nada aqui aparece diretamente no corpo da página.
+-->
+<head>
+
+  <!--
+    <meta charset="UTF-8">
+    - "<meta>"   -> tag de metadados; é uma tag vazia (não tem tag de fecho).
+    - "charset"  -> conjunto de caracteres usado para ler o ficheiro.
+    - "UTF-8"    -> codificação universal que suporta acentos (á, ç, ã), símbolos (°C) e emojis.
+  -->
+  <meta charset="UTF-8">
+
+  <!--
+    <meta name="Flávio Duarte" content="02-Bootstrap">
+    - "name"     -> nome do metadado.
+    - "content"  -> valor do metadado.
+    ATENÇÃO: aqui os valores estão trocados. O "name" deve ser uma palavra-chave
+    reconhecida (ex.: "author", "description"). O correto seria:
+        <meta name="author" content="Flávio Duarte">
+        <meta name="description" content="02-Bootstrap">
+  -->
+  <meta name="Flávio Duarte" content="02-Bootstrap">
+
+  <!--
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    - "viewport"            -> área visível da página no ecrã do dispositivo.
+    - "width=device-width"  -> a largura da página = largura real do ecrã (telemóvel, tablet...).
+    - "initial-scale=1"     -> zoom inicial a 100%.
+    Essencial para o design responsivo do Bootstrap funcionar em telemóveis.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    <title>Home Sweet Home</title>
+    - Texto que aparece no separador (tab) do browser, nos favoritos e nos resultados de pesquisa.
+  -->
+  <title>Home Sweet Home</title>
+
+  <!--
+    <link rel="stylesheet" href="...font-awesome...">
+    - "<link>"            -> liga o documento a um recurso externo (tag vazia).
+    - "rel="stylesheet""  -> "relationship": diz que o recurso é uma folha de estilos CSS.
+    - "href"              -> endereço (URL) do ficheiro.
+    - Font Awesome 6.7.2  -> biblioteca de ícones (lâmpada, termómetro, relógio...), carregada
+                             a partir da CDN "cdnjs" (servidor público de bibliotecas).
+  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <!--
+    <link href="...bootstrap.min.css" rel="stylesheet" integrity="..." crossorigin="anonymous">
+    - Carrega o CSS do Bootstrap 5.3.3 a partir da CDN "jsDelivr".
+    - ".min.css"       -> versão "minificada" (sem espaços nem comentários) para carregar mais rápido.
+    - "integrity"      -> SRI (Subresource Integrity): código "hash" sha384 do ficheiro. O browser
+                          confirma que o ficheiro descarregado é exatamente o original e não foi
+                          alterado por terceiros. Se não coincidir, o ficheiro não é usado.
+    - "crossorigin="anonymous"" -> o pedido ao outro domínio é feito sem enviar cookies nem
+                          credenciais; é obrigatório para a verificação "integrity" funcionar.
+  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<!-- </head> fecha o cabeçalho -->
+</head>
+
+<!--
+  <body>
+  - Corpo do documento: tudo o que o utilizador vê na página fica aqui dentro.
+-->
+<body>
+
+  <!-- ======================================================================
+       BARRA DE NAVEGAÇÃO (NAVBAR)
+       ====================================================================== -->
+
+  <!--
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    - "<nav>"               -> elemento semântico HTML5 para blocos de navegação (menus).
+    - "class"               -> atributo que aplica classes CSS (várias, separadas por espaço).
+    - "navbar"              -> classe Bootstrap: transforma o elemento numa barra de navegação.
+    - "navbar-expand-lg"    -> o menu fica expandido (horizontal) em ecrãs "lg" (≥ 992px);
+                               em ecrãs menores fica recolhido (collapse).
+    - "navbar-dark"         -> texto claro, próprio para fundos escuros.
+    - "bg-dark"             -> "background dark": cor de fundo escura (cinzento quase preto).
+  -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!--
+      <div class="container-fluid">
+      - "<div>"             -> "division": caixa genérica, sem significado próprio, usada para agrupar.
+      - "container-fluid"   -> contentor Bootstrap que ocupa 100% da largura do ecrã.
+    -->
+    <div class="container-fluid">
+
+      <!--
+        <div class="row">
+        - "row" -> linha da grelha (grid) do Bootstrap; deve conter colunas ("col-...").
+      -->
+      <div class="row">
+
+        <!--
+          <div class="col-sm"></div>
+          - "col"   -> coluna da grelha.
+          - "sm"    -> "small": a partir de ecrãs ≥ 576px as colunas ficam lado a lado.
+          - Sem número (col-sm em vez de col-sm-4) -> as colunas dividem o espaço igualmente.
+          - Aqui a coluna está VAZIA (abre e fecha logo), por isso não faz nada visível.
+
+          <a class="navbar-brand">Home Sweet Home</a>
+          - "<a>"            -> "anchor": hiperligação. Sem "href", não leva a lado nenhum.
+          - "navbar-brand"   -> classe Bootstrap para o nome/logótipo do site (letra maior).
+          NOTA: o <a> está fora de qualquer coluna, diretamente dentro da "row" –
+          não é a forma recomendada de usar a grelha.
+        -->
+        <div class="col-sm"></div><a class="navbar-brand">Home Sweet Home</a>
+
+      <!-- fecha a "row" -->
+      </div>
+
+      <!-- Outra coluna vazia, desta vez FORA da "row" (não tem efeito útil). -->
+      <div class="col-sm"></div>
+
+    <!-- fecha o "container-fluid" -->
+    </div>
+
+    <!--
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      - "collapse"          -> classe Bootstrap que esconde o conteúdo até ser "expandido".
+      - "navbar-collapse"   -> área do menu que recolhe em ecrãs pequenos.
+      - "id"                -> identificador ÚNICO na página. Serviria para um botão "hambúrguer"
+                               (navbar-toggler) abrir/fechar este menu.
+      NOTA: não existe nenhum botão "navbar-toggler" nesta página, por isso em ecrãs
+      menores que 992px o menu fica escondido e não há forma de o abrir.
+    -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <!--
+        <div class="navbar-nav">
+        - "navbar-nav" -> agrupa os links de navegação e alinha-os.
+      -->
+      <div class="navbar-nav">
+
+        <!--
+          <a class=" nav-link active" href="index.html">Dashboard</a>
+          - "nav-link"   -> estilo Bootstrap de link de navegação.
+          - "active"     -> destaca o link da página onde estamos.
+          - "href"       -> ficheiro para onde o link aponta (esta mesma página).
+          - (o espaço antes de "nav-link" é inofensivo, mas desnecessário)
+
+          <span class="sr-only">(current)</span>
+          - "<span>"     -> caixa genérica "em linha" (não quebra a linha).
+          - "sr-only"    -> "screen reader only": texto só para leitores de ecrã.
+          ATENÇÃO: "sr-only" é do Bootstrap 4. No Bootstrap 5 chama-se "visually-hidden".
+          Como não existe no 5.3.3, o texto "(current)" aparece no ecrã. Forma moderna:
+            <a class="nav-link active" aria-current="page" href="index.html">Dashboard</a>
+        -->
+        <a class=" nav-link active" href="index.html">Dashboard</a><span class="sr-only">(current)</span>
+
+        <!-- Link para a página de histórico ("history.html"). -->
+        <a class="nav-link" href="history.html">History</a>
+
+      <!-- fecha "navbar-nav" -->
+      </div>
+    <!-- fecha "navbar-collapse" -->
+    </div>
+  <!-- fecha a barra de navegação -->
+  </nav>
+
+
+  <!--
+    <p></p>
+    - "<p>" -> parágrafo. Aqui está vazio e serve apenas para criar espaço entre a navbar
+      e os cartões. Alternativa Bootstrap mais limpa: usar a classe "mt-3" (margin-top)
+      no contentor abaixo.
+  -->
+  <p></p>
+
+  <!-- ======================================================================
+       ÁREA PRINCIPAL: 3 CARTÕES (Kitchen, Living Room, Clock)
+       ====================================================================== -->
+
+  <!-- Contentor de largura total -->
+  <div class="container-fluid">
+
+    <!-- Linha da grelha que vai conter as 3 colunas -->
+    <div class="row">
+
+      <!-- ==================== CARTÃO 1: KITCHEN (Cozinha) ==================== -->
+
+      <!--
+        <div class="col-sm-4">
+        - A grelha do Bootstrap tem 12 colunas. "4" -> ocupa 4/12 = 1/3 da largura.
+        - "sm" -> isto aplica-se em ecrãs ≥ 576px. Em ecrãs menores, cada cartão ocupa
+          a largura toda (ficam empilhados uns por baixo dos outros).
+        - 3 colunas × 4 = 12 -> três cartões lado a lado.
+      -->
+      <div class="col-sm-4">
+
+        <!--
+          <div class="card">
+          - "card" -> componente Bootstrap: caixa com borda, cantos arredondados e fundo.
+        -->
+        <div class="card">
+
+          <!--
+            <div class="card-header text-center">
+            - "card-header"  -> zona de título do cartão, com fundo ligeiramente cinzento.
+            - "text-center"  -> centra o texto horizontalmente.
+          -->
+          <div class="card-header text-center">
+            <!-- "<h5>" -> título de nível 5 (h1 é o maior, h6 o mais pequeno). -->
+            <h5>Kitchen</h5>
+          </div>
+
+          <!--
+            <div class="card-body">
+            - "card-body" -> área de conteúdo do cartão, com espaçamento interno (padding).
+          -->
+          <div class="card-body">
+
+            <!-- ---------- Temperatura da cozinha ---------- -->
+            <!--
+              <p class="card-text">
+              - "card-text" -> estilo Bootstrap para texto dentro do cartão.
+            -->
+            <p class="card-text">
+              <!--
+                <i class="fa-solid fa-temperature-quarter text-success"></i>
+                - "<i>"                     -> originalmente "itálico"; o Font Awesome usa-o para ícones.
+                - "fa-solid"                -> estilo "sólido" (preenchido) do ícone.
+                - "fa-temperature-quarter"  -> ícone de termómetro a 1/4.
+                - "text-success"            -> classe Bootstrap: cor verde.
+
+                <strong>Temperature</strong>
+                - "<strong>" -> texto importante; o browser mostra-o a negrito.
+              -->
+              <i class="fa-solid fa-temperature-quarter text-success"></i> <strong>Temperature</strong>
+
+              <!--
+                <span id="kitchen-temperature" class="float-end">21.6 °C</span>
+                - "id="kitchen-temperature"" -> identificador para o JavaScript (js/index.js)
+                                                poder encontrar e atualizar este valor.
+                - "float-end"                -> encosta o elemento à direita ("end" = fim da linha).
+                - "21.6 °C"                  -> valor inicial mostrado.
+
+                <br>
+                - "break": quebra de linha (tag vazia).
+              -->
+              <span id="kitchen-temperature" class="float-end">21.6 °C</span><br>
+              <!-- Texto simples: há quanto tempo o valor foi atualizado. -->
+              5 minutes ago
+            </p>
+
+            <!-- ---------- Luzes da cozinha ---------- -->
+            <p class="card-text">
+              <!--
+                <i id="kitchen-lights-icon" class="fa-regular fa-lightbulb text-secondary"></i>
+                - "id"              -> permite ao JavaScript trocar o ícone quando se liga/desliga a luz.
+                - "fa-regular"      -> estilo "contorno" (vazio) -> representa luz DESLIGADA.
+                - "fa-lightbulb"    -> ícone de lâmpada.
+                - "text-secondary"  -> cor cinzenta.
+              -->
+              <i id="kitchen-lights-icon" class="fa-regular fa-lightbulb text-secondary"></i> <strong>Lights</strong>
+
+              <!--
+                <span class="float-end form-check form-switch">
+                - "float-end"    -> encosta à direita.
+                - "form-check"   -> contentor Bootstrap para caixas de seleção.
+                - "form-switch"  -> transforma a checkbox num interruptor (estilo ON/OFF).
+              -->
+              <span class="float-end form-check form-switch">
+                <!--
+                  <input class="form-check-input" type="checkbox" role="switch"
+                         id="kitchen-lights-toggle" aria-label="Kitchen lights">
+                  - "<input>"             -> campo de formulário (tag vazia).
+                  - "form-check-input"    -> estilo Bootstrap do campo.
+                  - "type="checkbox""     -> caixa de seleção (marcada/desmarcada).
+                  - "role="switch""       -> diz aos leitores de ecrã que é um interruptor.
+                  - "id"                  -> identificador usado pelo JavaScript.
+                  - "aria-label"          -> nome acessível lido pelos leitores de ecrã
+                                             (necessário porque o input não tem <label>).
+                  - Sem o atributo "checked" -> começa DESLIGADO.
+                -->
+                <input class="form-check-input" type="checkbox" role="switch" id="kitchen-lights-toggle"
+                  aria-label="Kitchen lights">
+              </span><br>
+              10 minutes ago
+            </p>
+            <!--
+              ATENÇÃO: o </p> abaixo está a mais (não há nenhum <p> aberto para fechar).
+              É um erro de HTML; o browser ignora-o, mas deve ser apagado.
+            -->
+            </p>
+
+            <!-- ---------- Janela Oeste ---------- -->
+            <p class="card-text">
+              <!--
+                "fa-eye"      -> ícone de olho (sensor).
+                "text-muted"  -> cor cinzenta suave (atenuada).
+              -->
+              <i class="fa-solid fa-eye text-muted"></i> <strong>West Window</strong>
+              <!-- "text-success" -> texto verde; "Open" = estado da janela (aberta). -->
+              <span class="float-end text-success">Open</span><br>
+              15 minutes ago
+            </p>
+
+            <!-- ---------- Janela Norte (mesma estrutura da anterior) ---------- -->
+            <p class="card-text">
+              <i class="fa-solid fa-eye text-muted"></i> <strong>North Window</strong>
+              <span class="float-end text-success">Open</span><br>
+              15 minutes ago
+            </p>
+
+          <!-- fecha card-body -->
+          </div>
+        <!-- fecha card -->
+        </div>
+      <!-- fecha col-sm-4 -->
+      </div>
+
+      <!-- ==================== CARTÃO 2: LIVING ROOM (Sala) ==================== -->
+      <!-- Mesma estrutura: coluna de 4/12 -> cartão -> cabeçalho -> corpo -->
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Living Room</h5>
+          </div>
+          <div class="card-body">
+
+            <!-- ---------- Temperatura da sala ---------- -->
+            <p class="card-text">
+              <!-- "text-danger" -> cor vermelha (temperatura mais alta que na cozinha). -->
+              <i class="fa-solid fa-temperature-quarter text-danger"></i> <strong>Temperature</strong>
+              <!-- id usado pelo JavaScript para atualizar a temperatura da sala -->
+              <span id="living-temperature" class="float-end">22.6 °C</span><br>
+              5 minutes ago
+            </p>
+
+            <!-- ---------- Luzes de teto ---------- -->
+            <p class="card-text">
+              <!-- Ícone de lâmpada em contorno e cinzento -> luz desligada -->
+              <i id="living-ceiling-lights-icon" class="fa-regular fa-lightbulb text-secondary"></i> <strong>Ceiling
+                Lights</strong>
+              <span class="float-end form-check form-switch">
+                <!-- Interruptor sem "checked" -> começa desligado -->
+                <input class="form-check-input" type="checkbox" role="switch" id="living-ceiling-lights-toggle"
+                  aria-label="Ceiling lights">
+              </span><br>
+              5 minutes ago
+            </p>
+
+            <!-- ---------- Luzes ambiente ---------- -->
+            <p class="card-text">
+              <!--
+                "fa-solid"      -> lâmpada preenchida  -> luz LIGADA.
+                "text-warning"  -> cor amarela (imita a luz acesa).
+              -->
+              <i id="living-ambient-lights-icon" class="fa-solid fa-lightbulb text-warning"></i> <strong>Ambient
+                Lights</strong>
+              <span class="float-end form-check form-switch">
+                <!--
+                  "checked" -> atributo booleano: basta estar presente para o interruptor
+                               começar LIGADO.
+                -->
+                <input class="form-check-input" type="checkbox" role="switch" id="living-ambient-lights-toggle"
+                  aria-label="Ambient lights" checked>
+              </span><br>
+              7 minutes ago
+            </p>
+
+            <!-- ---------- Música ambiente ---------- -->
+            <p class="card-text">
+              <!--
+                "fa-volume-high" -> ícone de altifalante com som.
+                "text-primary"   -> cor principal do Bootstrap (azul).
+              -->
+              <i id="living-music-icon" class="fa-solid fa-volume-high text-primary"></i> <strong>Ambient Music</strong>
+              <span class="float-end form-check form-switch">
+                <!-- "checked" -> música começa LIGADA -->
+                <input class="form-check-input" type="checkbox" role="switch" id="living-music-toggle"
+                  aria-label="Ambient music" checked>
+              </span><br>
+              17 minutes ago
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CARTÃO 3: CLOCK (Relógio) ==================== -->
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <h5>Clock</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <!-- "fa-clock" -> ícone de relógio, em estilo contorno, cor azul -->
+              <i class="fa-regular fa-clock text-primary"></i> <strong>Time</strong>
+              <!-- id "clock-time": o JavaScript pode substituir "22:30" pela hora real -->
+              <span id="clock-time" class="float-end">22:30</span><br>
+
+              <!-- "fa-calendar" -> ícone de calendário (sem classe de cor -> cor normal do texto) -->
+              <i class="fa-regular fa-calendar"></i> <strong>Date</strong>
+              <!-- id "clock-date": o JavaScript pode substituir pela data atual (formato AAAA-MM-DD) -->
+              <span id="clock-date" class="float-end">2018-09-18</span><br>
+
+              <!-- "fa-sun" -> ícone de sol, amarelo ("text-warning") -->
+              <i class="fa-solid fa-sun text-warning"></i> <strong>Sunrise / Sunset above horizon</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    <!-- fecha a "row" -->
+    </div>
+  <!-- fecha o "container-fluid" -->
+  </div>
+
+  <!-- ======================================================================
+       SCRIPTS (colocados no fim do <body> para a página aparecer mais depressa:
+       o browser desenha primeiro o HTML e só depois carrega o JavaScript)
+       ====================================================================== -->
+
+  <!--
+    <script src="...bootstrap.bundle.min.js" integrity="..." crossorigin="anonymous"></script>
+    - "<script>"   -> carrega/executa JavaScript. Precisa SEMPRE da tag de fecho </script>.
+    - "src"        -> "source": endereço do ficheiro JavaScript.
+    - "bundle"     -> inclui também o Popper (biblioteca usada em menus dropdown e tooltips).
+    - Este JS faz funcionar componentes interativos do Bootstrap (ex.: abrir/fechar o "collapse").
+    - "integrity" e "crossorigin" -> mesma função de segurança explicada no <link> do CSS.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!--
+    <script src="js/index.js"></script>
+    - Carrega o JavaScript do próprio projeto, que está na pasta "js", ficheiro "index.js".
+    - Caminho relativo: procurado a partir da pasta onde está este index.html.
+    - É aqui que estará a lógica que usa os "id" (ex.: reagir aos interruptores, trocar
+      os ícones das lâmpadas, atualizar hora e temperatura).
+  -->
+  <script src="js/index.js"></script>
+
+<!-- fecha o corpo -->
+</body>
+
+<!-- fecha o documento -->
+</html>
