@@ -1,0 +1,4 @@
+# Pasta com as dependências instaladas pelo npm (recria-se com "npm install")
+nodejs-app/node_modules/
+# Chave PRIVADA da conta de serviço: nunca pode ir para o Git
+nodejs-app/serviceAccountKey.json
